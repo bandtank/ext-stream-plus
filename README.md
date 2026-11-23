@@ -1,62 +1,101 @@
 # Ext Stream Plus
-This extension enables full datetime fields in stream comments and posts.
 
-## Table of Contents
+EspoCRM extension that displays full date-times in stream notes and expands stream updates by default. Both features are enabled while the extension is installed.
 
-* [Introduction](#introduction)
-* [Requires](#requires)
-* [Installation](#installation)
-    * [Pre-build extension release](#pre-build-extension-release)
+Requires EspoCRM 10.1 or newer and PHP 8.5 or newer.
 
-## Introduction
+## Configuration
 
-This extension adds two features to the EspoCRM stream:
-- displaying the full date and time; By default, EspoCRM shows a short datetime on the stream, but with this extension, users can see the full date and time directly in the stream.
-- Stream updates expanded by default, so users can see the full update without having to click on the 'expand' button.
-
-Both features are enabled automatically while the module is installed.
-
-![image](https://user-images.githubusercontent.com/32223252/221196649-8c7339fd-79ac-41b7-b514-72d588738428.png)
-
-
-![image](https://user-images.githubusercontent.com/32223252/220250006-23fb2521-6108-4b9b-b357-0a59677f6c11.png)
-
-## Requirements
-
-- EspoCRM >= 10.1
-
-## Build the extension
-
-Install dependencies and build the installable ZIP:
-
-```sh
-npm ci
-npm run extension
-```
-
-The ZIP is created in `build/`. Bundled modules also register their `lib/init.js` in `Resources/metadata/app/client.json`.
-
-## Set up a local EspoCRM instance
-
-Install Node.js, npm, PHP, Composer, Git, and a database supported by EspoCRM. Copy the default configuration, then set the database connection, site URL, and webserver owner/group for your environment:
+Copy `config-default.json` to `config.json` to configure the local development instance:
 
 ```sh
 cp config-default.json config.json
 ```
 
-Create the configured database, then run:
+`config-default.json` supplies defaults. Override the EspoCRM repository and branch, database connection, site URL, and webserver owner/group in `config.json` as needed.
+
+To override EspoCRM configuration after installation, create a root `config.php` that returns an array of configuration values. For example:
+
+```php
+<?php
+return [
+    'useCacheInDeveloperMode' => true,
+];
+```
+
+## Building
+
+### Preparation
+
+Install Node.js 24 or newer, npm 11 or newer, PHP, Composer, Git, and a database supported by EspoCRM. Install the project dependencies:
+
+```sh
+npm ci
+```
+
+Create the database configured in `config.json` before building a local instance.
+
+### Full EspoCRM instance
+
+Run:
 
 ```sh
 npm run all
 ```
 
-This downloads EspoCRM into `site/` and installs the extension. It replaces an existing `site/` directory. The default login is `admin` / `1`.
+This downloads EspoCRM, builds it under `site/`, and installs the extension. It replaces an existing `site/` directory but leaves the database intact. The default login is `admin` with password `1`. Check `site/data/logs/` if the build fails.
 
-After editing extension files, synchronize and rebuild the local instance:
+### Copying extension files to EspoCRM
+
+After changing files under `src/`, sync them to the local instance and rebuild its metadata:
 
 ```sh
 npm run sync
 npm run rebuild
 ```
 
-For an existing EspoCRM installation, download the latest package from the [release page](https://github.com/bandtank/ext-stream-plus/releases/latest) and upload it under **Administration** -> **Extensions**.
+Run the after-install hook manually when needed:
+
+```sh
+node build --after-install
+```
+
+### Extension package
+
+Build the installable ZIP with:
+
+```sh
+npm run extension
+```
+
+The package is written to `build/`; its version comes from `package.json`. For an existing EspoCRM installation, upload the ZIP under **Administration** → **Extensions**.
+
+This extension is bundled. Keep `bundled` and `jsTranspiled` enabled in `src/files/custom/Espo/Modules/ExtStreamPlus/Resources/module.json`, and keep the bundle initializer registered in `src/files/custom/Espo/Modules/ExtStreamPlus/Resources/metadata/app/client.json`.
+
+### Additional extensions
+
+To install other extension ZIPs automatically during `npm run all`, place them in the root `extensions/` directory.
+
+## Development workflow
+
+1. Edit extension files under `src/`.
+2. Run `npm run sync`.
+3. Run `npm run rebuild` and test the changes in the EspoCRM instance under `site/`.
+
+## Versioning
+
+The package version is stored in `package.json` and `package-lock.json`. Bump it with:
+
+```sh
+npm version patch --no-git-tag-version
+npm version minor --no-git-tag-version
+npm version major --no-git-tag-version
+```
+
+## Updating build tools
+
+Update `espo-extension-tools` in `package.json` to the desired release, then refresh the lockfile and dependencies:
+
+```sh
+npm update espo-extension-tools espo-frontend-build-tools
+```
