@@ -1,0 +1,24 @@
+{
+  "name": "espocrm-ext-stream-plus",
+  "version": "1.0.0",
+  "description": "Full date-time in EspoCRM streams",
+  "scripts": {
+    "copy": "node build --copy",
+    "composer-install": "node build --composer-install",
+    "sync": "node build --copy && node build --composer-install",
+    "extension": "node build --extension",
+    "clear-cache": "php site/clear_cache.php",
+    "rebuild": "node build --rebuild",
+    "all": "node build --all"
+  },
+  "type": "module",
+  "author": "Anthony Andriano",
+  "dependencies": {
+    "espo-extension-tools": "github:espocrm/extension-tools#0.4.5",
+    "fs-extra": "^11.0.0"
+  },
+  "engines": {
+    "npm": ">=11",
+    "node": ">=24"
+  }
+}

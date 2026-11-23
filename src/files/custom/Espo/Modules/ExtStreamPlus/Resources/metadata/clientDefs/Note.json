@@ -1,0 +1,16 @@
+{
+  "itemViews": {
+    "Post": "ext-stream-plus:views/stream/notes/post",
+    "EmailSent": "ext-stream-plus:views/stream/notes/email-sent",
+    "Create": "ext-stream-plus:views/stream/notes/create",
+    "EmailReceived": "ext-stream-plus:views/stream/notes/email-received",
+    "CreateRelated": "ext-stream-plus:views/stream/notes/create-related",
+    "Update": "ext-stream-plus:views/stream/notes/update",
+    "Status": "ext-stream-plus:views/stream/notes/status",
+    "Assign": "ext-stream-plus:views/stream/notes/assign",
+    "Relate": "ext-stream-plus:views/stream/notes/relate",
+    "Unrelate": "ext-stream-plus:views/stream/notes/unrelate",
+    "MentionInPost": "ext-stream-plus:views/stream/notes/mention-in-post",
+    "EventConfirmation": "ext-stream-plus:views/stream/notes/event-confirmation"
+  }
+}

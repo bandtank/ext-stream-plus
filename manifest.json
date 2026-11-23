@@ -1,0 +1,11 @@
+{
+    "name": "Ext Stream Plus",
+    "version": "1.0.2",
+    "type": "extension",
+    "acceptableVersions": [
+        ">=10.1.0"
+    ],
+    "releaseDate": "2026-11-23",
+    "author": "Anthony Andriano",
+    "description": "Full date-time in stream"
+}

@@ -1,0 +1,14 @@
+{
+    "module": "ExtStreamPlus",
+    "name": "Stream Plus",
+    "description": "Enhancements for EspoCRM streams.",
+    "author": "Anthony Andriano",
+    "bundled": true,
+    "acceptableVersions": [
+        ">=10.1.0"
+    ],
+    "php": [
+        ">=8.5"
+    ],
+    "scripts": []
+}
