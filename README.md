@@ -1,6 +1,6 @@
 # Ext Stream Plus
 
-EspoCRM extension that displays full date-times in stream notes and expands stream updates by default. Both features are enabled while the extension is installed.
+EspoCRM extension that displays full date-times in stream notes while leaving stream updates collapsed by default.
 
 Requires EspoCRM 10.1 or newer and PHP 8.5 or newer.
 

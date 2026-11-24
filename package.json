@@ -1,6 +1,6 @@
 {
   "name": "espocrm-ext-stream-plus",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Full date-time in EspoCRM streams",
   "scripts": {
     "copy": "node build --copy",
